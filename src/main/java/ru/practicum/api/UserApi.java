@@ -1,4 +1,4 @@
-package ru.practicum.pages.api;
+package ru.practicum.api;
 
 
 import io.restassured.http.ContentType;

@@ -1,4 +1,4 @@
-package ru.practicum.pages.api;
+package ru.practicum.api;
 
 
 public class User {

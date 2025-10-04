@@ -5,18 +5,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-import org.openqa.selenium.WebDriver;
-
-import org.openqa.selenium.chrome.ChromeDriver;
 import ru.practicum.pages.LoginPage;
 import ru.practicum.pages.MainPage;
 import ru.practicum.pages.RegistrationPage;
-import ru.practicum.pages.api.UserApi;
-import ru.practicum.pages.api.User;
+import ru.practicum.api.UserApi;
+import ru.practicum.api.User;
+
+import static org.junit.Assert.assertNotNull;
 
 
-public class RegistrationTest {
-    private WebDriver driver;
+public class RegistrationTest extends BaseTest {
     private MainPage mainPage;
     private LoginPage loginPage;
     private RegistrationPage registrationPage;
@@ -26,8 +24,7 @@ public class RegistrationTest {
 
     @Before
     public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);
         registrationPage = new RegistrationPage(driver);
@@ -56,6 +53,7 @@ public class RegistrationTest {
         registrationPage.verifyLoginPageUrl();
 
         accessToken = userApi.getAccessToken(user);
+        assertNotNull("Пользователь должен быть создан в системе", accessToken);
     }
 
 
@@ -81,6 +79,7 @@ public class RegistrationTest {
 
     @After
     public void tearDown() {
+        driver.quit();
 
         if (accessToken != null) {
             userApi.deleteUser(accessToken);
@@ -88,7 +87,6 @@ public class RegistrationTest {
         }
 
 
-        driver.quit();
     }
 
 }
