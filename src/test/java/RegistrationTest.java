@@ -1,6 +1,7 @@
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,9 @@ import ru.practicum.pages.RegistrationPage;
 import ru.practicum.api.UserApi;
 import ru.practicum.api.User;
 
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 
 public class RegistrationTest extends BaseTest {
@@ -39,40 +42,40 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void registrationTestWithValidData() throws InterruptedException {
 
-        // Открываем главную страницу
-        driver.get("https://stellarburgers.nomoreparties.site/");
 
-
+        mainPage.openMainPage();
         mainPage.сlickPersonalAccountButton();
         loginPage.clickRegistrationLinkButton();
         registrationPage.enterName(user.getName());
         registrationPage.enterEmail(user.getEmail());
         registrationPage.enterPassword(user.getPassword());
         registrationPage.clickRegistrationButton();
-        registrationPage.waitForLoginPage();
-        registrationPage.verifyLoginPageUrl();
+        loginPage.waitForLoginPage();
+        loginPage.verifyLoginPageUrl();
 
         accessToken = userApi.getAccessToken(user);
-        assertNotNull("Пользователь должен быть создан в системе", accessToken);
+        userApi.loginUserAndCheckStatus(user);
+
     }
 
 
     @Test
     public void faildRegistrationWithInvalidPasswordTest() throws InterruptedException {
 
-        // Открываем главную страницу
-        driver.get("https://stellarburgers.nomoreparties.site/");
 
-
+        mainPage.openMainPage();
         mainPage.сlickPersonalAccountButton();
         loginPage.clickRegistrationLinkButton();
-        registrationPage.enterName(RandomStringUtils.randomAlphabetic(8));
-        registrationPage.enterEmail(RandomStringUtils.randomAlphabetic(8) + "@test.ru");
+        registrationPage.enterName(user.getName());
+        registrationPage.enterEmail(user.getEmail());
         registrationPage.enterPassword("12345");
         registrationPage.clickRegistrationButton();
         registrationPage.waitForErrorMessage();
         registrationPage.checkErrorMessageDisplayed();
 
+
+        String accessToken = userApi.getAccessToken(user);
+        assertNull("Пользователь не должен быть создан при невалидном пароле", accessToken);
 
     }
 

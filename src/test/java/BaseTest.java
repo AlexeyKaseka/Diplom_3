@@ -3,7 +3,7 @@
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
-import ru.practicum.DriverHelper;
+import ru.practicum.util.DriverHelper;
 
 import java.io.IOException;
 

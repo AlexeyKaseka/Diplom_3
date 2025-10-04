@@ -19,6 +19,7 @@ public class RegistrationPage {
     private final By passwordFieldLocator = By.cssSelector("input[type='password']");
     private final By registrationButtonLocator = By.xpath("//button[contains(@class, 'button_button__33qZ0') and contains(@class, 'button_button_type_primary__1O7Bx')]");
     private final By errorMessageLocator = By.xpath("//p[contains(@class, 'input__error') and contains(text(), 'Некорректный пароль')]");
+    private final By registrationEnterButton = By.cssSelector(".Auth_link__1fOlj");
 
     public RegistrationPage(WebDriver driver) {
         this.driver = driver;
@@ -50,15 +51,6 @@ public class RegistrationPage {
         driver.findElement(registrationButtonLocator).click();
     }
 
-    public void waitForLoginPage() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
-    }
-
-
-    public void verifyLoginPageUrl() {
-        assertTrue("URL должен содержать /login", driver.getCurrentUrl().contains("/login"));
-    }
 
     public void waitForErrorMessage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -69,6 +61,11 @@ public class RegistrationPage {
     public void checkErrorMessageDisplayed() {
         WebElement errorMessage = driver.findElement(errorMessageLocator);
         assertTrue("Должно отображаться сообщение об ошибке", errorMessage.isDisplayed());
+    }
+
+    public void clickRegistrationEnterButton() {
+
+        driver.findElement(registrationEnterButton).click();
     }
 
 

@@ -1,24 +1,20 @@
 package ru.practicum.api;
 
+import static org.apache.http.HttpStatus.SC_OK;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static ru.practicum.api.ApiConstants.*;
+
 
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 
 import static io.restassured.RestAssured.given;
+import static ru.practicum.util.EnvConfig.BASE_URL;
+
 
 public class UserApi {
 
     private User user;
-
-
-    private static final String BASE_URL = "https://stellarburgers.nomoreparties.site";
-    public static final String CREATE_USER_ENDPOINT = "/api/auth/register";
-    public static final String LOGIN_USER_ENDPOINT = "/api/auth/login";
-    public static final String DELETE_USER_ENDPOINT = "/api/auth/user";
-    public static final String AUTHORIZATION = "Authorization";
-
-
-
 
 
     public ValidatableResponse createUser(User user) {
@@ -26,13 +22,13 @@ public class UserApi {
                 .contentType(ContentType.JSON)
                 .body(user)
                 .when()
-                .post(BASE_URL + CREATE_USER_ENDPOINT)
+                .post( BASE_URL + CREATE_USER_ENDPOINT)
                 .then();
 
 
     }
 
-    public  ValidatableResponse loginUser(User user) {
+    public ValidatableResponse loginUser(User user) {
         return given()
                 .contentType(ContentType.JSON)
                 .body(user)
@@ -42,14 +38,14 @@ public class UserApi {
     }
 
 
-    public  String getAccessToken(User user) {
+    public String getAccessToken(User user) {
         return loginUser(user)
                 .extract()
                 .path("accessToken");
     }
 
 
-    public  ValidatableResponse deleteUser(String accessToken) {
+    public ValidatableResponse deleteUser(String accessToken) {
         return given()
                 .contentType(ContentType.JSON)
                 .header(AUTHORIZATION, accessToken)
@@ -57,6 +53,17 @@ public class UserApi {
                 .delete(BASE_URL + DELETE_USER_ENDPOINT)
                 .then();
     }
+
+
+
+    public void loginUserAndCheckStatus(User user) {
+        loginUser(user)
+                .statusCode(SC_OK)
+                .body("success", equalTo(true));
+    }
+
+
+
 
 
 }
