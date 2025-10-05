@@ -1,3 +1,5 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Before;
 import org.junit.Test;
 import ru.practicum.pages.MainPage;
@@ -16,6 +18,8 @@ public class SectionSelectedTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Проверка активности раздела 'Булки' по умолчанию")
+    @Description("Позитивный тест: При загрузке главной страницы раздел 'Булки' должен быть выбран автоматически")
     public void bunsSectionIsSelectedByDefaultTest() {
 
         mainPage.openMainPage();
@@ -28,6 +32,8 @@ public class SectionSelectedTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Проверка переключения на раздел 'Соусы'")
+    @Description("Позитивный тест: Раздел 'Соусы' выбирается кликом по соответствующей вкладке")
     public void sauceSectionSelectedTest() {
         mainPage.openMainPage();
         mainPage.clickSaucesSection();
@@ -38,6 +44,8 @@ public class SectionSelectedTest extends BaseTest {
 
 
     @Test
+    @DisplayName("Проверка переключения на раздел 'Начинки'")
+    @Description("Позитивный тест: Раздел 'Начинки' выбирается кликом по соответствующей вкладке")
     public void fillingSectionSelectedTest() {
         mainPage.openMainPage();
         mainPage.clickFillingSection();
@@ -49,6 +57,8 @@ public class SectionSelectedTest extends BaseTest {
 
 
     @Test
+    @DisplayName("Проверка возврата к разделу 'Булки' после выбора другого раздела")
+    @Description("Позитивный тест: Разделу 'Булки' выбирается кликом по соответствующей вкладке после переключения на другие разделы")
     public void bunsSectionCanBeSelectedAfterSaucesTest() {
         mainPage.openMainPage();
         mainPage.clickSaucesSection();

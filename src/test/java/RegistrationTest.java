@@ -1,4 +1,6 @@
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 
@@ -39,6 +41,8 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Создание пользователя")
+    @Description("Позитивный тест: проверка успешного создания пользователя с валидными данными")
     public void registrationTestWithValidData() throws InterruptedException {
 
 
@@ -59,6 +63,8 @@ public class RegistrationTest extends BaseTest {
 
 
     @Test
+    @DisplayName("Создание пользователя без пароля")
+    @Description("Негативный тест: проверка неуспешного создания пользователя без пароля")
     public void faildRegistrationWithInvalidPasswordTest() throws InterruptedException {
 
 

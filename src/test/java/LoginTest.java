@@ -1,3 +1,5 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -39,6 +41,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Авторизация пользователя")
+    @Description("Позитивный тест: проверка успешной авторизации пользователя через кнопку войти на главной")
     public void loginFromMainPageEnterButtonTest() {
 
 
@@ -57,6 +61,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Авторизация пользователя")
+    @Description("Позитивный тест: проверка успешной авторизации пользователя через кнопку личный кабинет")
     public void loginFromPersonalAccountButtonTest() {
 
 
@@ -76,6 +82,8 @@ public class LoginTest extends BaseTest {
 
 
     @Test
+    @DisplayName("Авторизация пользователя")
+    @Description("Позитивный тест: проверка успешной авторизации пользователя через кнопку войти на страницы регистрации")
     public void loginFromRegistrationEnterButtonTest() {
 
 
@@ -96,6 +104,8 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Авторизация пользователя")
+    @Description("Позитивный тест: проверка успешной авторизации пользователя через кнопку войти на странице востановления пароля")
     public void loginFromForgotPasswordEnterButtonTest() {
 
 
