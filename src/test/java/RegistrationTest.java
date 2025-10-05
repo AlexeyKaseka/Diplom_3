@@ -35,7 +35,7 @@ public class RegistrationTest extends BaseTest {
         user.withName(RandomStringUtils.randomAlphabetic(8))
                 .withEmail(RandomStringUtils.randomAlphabetic(8) + "@test.ru")
                 .withPassword(RandomStringUtils.randomAlphabetic(8));
-
+        accessToken = userApi.getAccessToken(user);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class RegistrationTest extends BaseTest {
         loginPage.waitForLoginPage();
         loginPage.verifyLoginPageUrl();
 
-        accessToken = userApi.getAccessToken(user);
+
         userApi.loginUserAndCheckStatus(user);
 
     }

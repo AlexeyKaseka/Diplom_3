@@ -2,7 +2,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
+
 import ru.practicum.api.User;
 import ru.practicum.api.UserApi;
 import ru.practicum.pages.ForgotPasswordPage;
@@ -10,8 +10,7 @@ import ru.practicum.pages.LoginPage;
 import ru.practicum.pages.MainPage;
 import ru.practicum.pages.RegistrationPage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+
 
 public class LoginTest extends BaseTest {
 
@@ -36,6 +35,7 @@ public class LoginTest extends BaseTest {
                 .withEmail(RandomStringUtils.randomAlphabetic(8) + "@test.ru")
                 .withPassword(RandomStringUtils.randomAlphabetic(8));
         userApi.createUser(user);
+        accessToken = userApi.getAccessToken(user);
     }
 
     @Test
@@ -51,7 +51,6 @@ public class LoginTest extends BaseTest {
         mainPage.verifyMainPageUrl();
 
 
-        accessToken = userApi.getAccessToken(user);
         userApi.loginUserAndCheckStatus(user);
 
 
@@ -70,7 +69,6 @@ public class LoginTest extends BaseTest {
         mainPage.verifyMainPageUrl();
 
 
-        accessToken = userApi.getAccessToken(user);
         userApi.loginUserAndCheckStatus(user);
 
 
@@ -92,7 +90,6 @@ public class LoginTest extends BaseTest {
         mainPage.verifyMainPageUrl();
 
 
-        accessToken = userApi.getAccessToken(user);
         userApi.loginUserAndCheckStatus(user);
 
 
@@ -113,7 +110,6 @@ public class LoginTest extends BaseTest {
         mainPage.verifyMainPageUrl();
 
 
-        accessToken = userApi.getAccessToken(user);
         userApi.loginUserAndCheckStatus(user);
 
 
