@@ -35,13 +35,11 @@ public class LoginTest extends BaseTest {
         user.withName(RandomStringUtils.randomAlphabetic(8))
                 .withEmail(RandomStringUtils.randomAlphabetic(8) + "@test.ru")
                 .withPassword(RandomStringUtils.randomAlphabetic(8));
-
+        userApi.createUser(user);
     }
 
     @Test
     public void loginFromMainPageEnterButtonTest() {
-
-        userApi.createUser(user);
 
 
         mainPage.openMainPage();
@@ -62,8 +60,6 @@ public class LoginTest extends BaseTest {
     @Test
     public void loginFromPersonalAccountButtonTest() {
 
-        userApi.createUser(user);
-
 
         mainPage.openMainPage();
         mainPage.сlickPersonalAccountButton();
@@ -83,8 +79,6 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void loginFromRegistrationEnterButtonTest() {
-
-        userApi.createUser(user);
 
 
         mainPage.openMainPage();
@@ -107,8 +101,6 @@ public class LoginTest extends BaseTest {
     @Test
     public void loginFromForgotPasswordEnterButtonTest() {
 
-        userApi.createUser(user);
-
 
         mainPage.openMainPage();
         mainPage.сlickPersonalAccountButton();
@@ -126,8 +118,6 @@ public class LoginTest extends BaseTest {
 
 
     }
-
-
 
 
     @After
