@@ -1,7 +1,7 @@
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.After;
-import org.junit.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,8 +12,7 @@ import ru.practicum.pages.RegistrationPage;
 import ru.practicum.api.UserApi;
 import ru.practicum.api.User;
 
-import static org.apache.http.HttpStatus.SC_OK;
-import static org.junit.Assert.assertNotNull;
+
 import static org.junit.Assert.assertNull;
 
 

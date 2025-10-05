@@ -11,6 +11,8 @@ import java.util.List;
 
 
 import static org.junit.Assert.assertTrue;
+import static ru.practicum.util.EnvConfig.LOGIN_PAGE_PATH;
+import static ru.practicum.util.EnvConfig.LOGIN_PAGE_URL;
 
 
 public class LoginPage {
@@ -32,12 +34,12 @@ public class LoginPage {
 
     public void waitForLoginPage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.urlToBe("https://stellarburgers.nomoreparties.site/login"));
+        wait.until(ExpectedConditions.urlToBe(LOGIN_PAGE_URL));
     }
 
 
     public void verifyLoginPageUrl() {
-        assertTrue("URL должен содержать /login", driver.getCurrentUrl().contains("/login"));
+        assertTrue("URL должен содержать /login", driver.getCurrentUrl().contains(LOGIN_PAGE_PATH));
     }
 
     public List<WebElement> getInputFields() {
