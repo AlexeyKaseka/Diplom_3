@@ -1,5 +1,6 @@
 package ru.practicum.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -13,6 +14,7 @@ public class ForgotPasswordPage {
         this.driver = driver;
     }
 
+    @Step
     public void clickForgotPasswordEnterButtonLocator() {
 
         driver.findElement(forgotPasswordEnterButtonLocator).click();

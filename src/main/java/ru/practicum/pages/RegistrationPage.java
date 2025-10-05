@@ -1,5 +1,6 @@
 package ru.practicum.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,6 +26,7 @@ public class RegistrationPage {
         this.driver = driver;
     }
 
+    @Step
     public List<WebElement> getInputFields() {
         return driver.findElements(fieldsEmailAndPasswordLocator);
     }
@@ -35,34 +37,38 @@ public class RegistrationPage {
         fields.get(0).sendKeys(name);
     }
 
+    @Step
     public void enterEmail(String email) {
         List<WebElement> fields = getInputFields();
         fields.get(1).clear();
         fields.get(1).sendKeys(email);
     }
 
+    @Step
     public void enterPassword(String password) {
         driver.findElement(passwordFieldLocator).clear();
         driver.findElement(passwordFieldLocator).sendKeys(password);
     }
 
+    @Step
     public void clickRegistrationButton() {
 
         driver.findElement(registrationButtonLocator).click();
     }
 
-
+    @Step
     public void waitForErrorMessage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessageLocator));
     }
 
-
+    @Step
     public void checkErrorMessageDisplayed() {
         WebElement errorMessage = driver.findElement(errorMessageLocator);
         assertTrue("Должно отображаться сообщение об ошибке", errorMessage.isDisplayed());
     }
 
+    @Step
     public void clickRegistrationEnterButton() {
 
         driver.findElement(registrationEnterButton).click();

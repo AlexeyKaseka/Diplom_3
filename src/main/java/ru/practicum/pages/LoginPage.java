@@ -1,5 +1,6 @@
 package ru.practicum.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,43 +28,50 @@ public class LoginPage {
         this.driver = driver;
     }
 
+    @Step
     public void clickRegistrationLinkButton() {
 
         driver.findElement(registrationLinkButtonLocator).click();
     }
 
+    @Step
     public void waitForLoginPage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlToBe(LOGIN_PAGE_URL));
     }
 
-
+    @Step
     public void verifyLoginPageUrl() {
         assertTrue("URL должен содержать /login", driver.getCurrentUrl().contains(LOGIN_PAGE_PATH));
     }
 
+    @Step
     public List<WebElement> getInputFields() {
         return driver.findElements(fieldsEmailAndPasswordLocator);
 
     }
 
+    @Step
     public void enterEmail(String email) {
         List<WebElement> fields = getInputFields();
         fields.get(0).clear();
         fields.get(0).sendKeys(email);
     }
 
+    @Step
     public void enterPassword(String password) {
         List<WebElement> fields = getInputFields();
         fields.get(1).clear();
         fields.get(1).sendKeys(password);
     }
 
+    @Step
     public void clickEnterButton() {
 
         driver.findElement(enterButton).click();
     }
 
+    @Step
     public void clickForgotPasswordLinkLocator() {
 
         driver.findElement(forgotPasswordLinkLocator).click();

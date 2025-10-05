@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static ru.practicum.api.ApiConstants.*;
 
 
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 
@@ -16,18 +17,19 @@ public class UserApi {
 
     private User user;
 
-
+    @Step
     public ValidatableResponse createUser(User user) {
         return given()
                 .contentType(ContentType.JSON)
                 .body(user)
                 .when()
-                .post( BASE_URL + CREATE_USER_ENDPOINT)
+                .post(BASE_URL + CREATE_USER_ENDPOINT)
                 .then();
 
 
     }
 
+    @Step
     public ValidatableResponse loginUser(User user) {
         return given()
                 .contentType(ContentType.JSON)
@@ -37,14 +39,14 @@ public class UserApi {
                 .then();
     }
 
-
+    @Step
     public String getAccessToken(User user) {
         return loginUser(user)
                 .extract()
                 .path("accessToken");
     }
 
-
+    @Step
     public ValidatableResponse deleteUser(String accessToken) {
         return given()
                 .contentType(ContentType.JSON)
@@ -55,15 +57,12 @@ public class UserApi {
     }
 
 
-
+    @Step
     public void loginUserAndCheckStatus(User user) {
         loginUser(user)
                 .statusCode(SC_OK)
                 .body("success", equalTo(true));
     }
-
-
-
 
 
 }
