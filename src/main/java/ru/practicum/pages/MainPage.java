@@ -27,31 +27,31 @@ public class MainPage {
         this.driver = driver;
     }
 
-    @Step
+    @Step("Загрузка главной страницы")
     public void openMainPage() {
 
         driver.get(BASE_URL);
     }
 
-    @Step
+    @Step("Поиск и нажатие на кнопку 'Личный кабинет'")
     public void сlickPersonalAccountButton() {
 
         driver.findElement(personalAccountButtonLocator).click();
     }
 
-    @Step
+    @Step("Поиск и нажатие кнопки'Войти' на главной")
     public void mainPageEnterButton() {
 
         driver.findElement(mainPageEnterButtonLocator).click();
     }
 
-    @Step
+    @Step("Ожидание загрузки главной страницы")
     public void waitForMainPage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlToBe(BASE_URL));
     }
 
-    @Step
+    @Step("Проверка загрузки главной страницы")
     public void verifyMainPageUrl() {
         assertEquals(BASE_URL, driver.getCurrentUrl());
     }
@@ -60,36 +60,36 @@ public class MainPage {
         return driver.findElement(activeSectionLocator).getText();
     }
 
-    @Step
+    @Step("Проверка активности раздела 'Булки'")
     public boolean isBunsSectionActive() {
         return getActiveSectionText().contains("Булки");
     }
 
-    @Step
+    @Step("Ожидание и нажатие на раздел 'Соус'")
     public void clickSaucesSection() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(saucesSectionLocator)).click();
         wait.until(driver -> isSaucesSectionActive());
     }
 
-    @Step
+    @Step("Проверка активности раздела 'Соусы'")
     public boolean isSaucesSectionActive() {
         return getActiveSectionText().contains("Соусы");
     }
 
-    @Step
+    @Step("Ожидание и нажатие на раздел 'Начинки'")
     public void clickFillingSection() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(fillingsSectionLocator)).click();
         wait.until(driver -> isFillingsSectionActive());
     }
 
-    @Step
+    @Step("Проверка активности раздела 'Начинки'")
     public boolean isFillingsSectionActive() {
         return getActiveSectionText().contains("Начинки");
     }
 
-    @Step
+    @Step("Ожидание и нажатие на раздел 'Булки'")
     public void clickBunSection() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.elementToBeClickable(bunsSectionLocator)).click();

@@ -28,50 +28,50 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    @Step
+    @Step("Поиск и нажатие на кнопку 'Зарегистрироваться' ведущую на страницу регистрации")
     public void clickRegistrationLinkButton() {
 
         driver.findElement(registrationLinkButtonLocator).click();
     }
 
-    @Step
+    @Step("Ожидание стрнаницы логина")
     public void waitForLoginPage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlToBe(LOGIN_PAGE_URL));
     }
 
-    @Step
+    @Step("Проверка загрузки страницы логина")
     public void verifyLoginPageUrl() {
         assertTrue("URL должен содержать /login", driver.getCurrentUrl().contains(LOGIN_PAGE_PATH));
     }
 
-    @Step
+    @Step("Поиск полей ввода")
     public List<WebElement> getInputFields() {
         return driver.findElements(fieldsEmailAndPasswordLocator);
 
     }
 
-    @Step
+    @Step("Заполнение поля 'Email'")
     public void enterEmail(String email) {
         List<WebElement> fields = getInputFields();
         fields.get(0).clear();
         fields.get(0).sendKeys(email);
     }
 
-    @Step
+    @Step("Заполнение поля 'Password'")
     public void enterPassword(String password) {
         List<WebElement> fields = getInputFields();
         fields.get(1).clear();
         fields.get(1).sendKeys(password);
     }
 
-    @Step
+    @Step("Нажатие на кнопку 'Войти'")
     public void clickEnterButton() {
 
         driver.findElement(enterButton).click();
     }
 
-    @Step
+    @Step("Поиск и нажатие на кнопку 'Восстановить пароль' ведущую на страницу восстановления пароля")
     public void clickForgotPasswordLinkLocator() {
 
         driver.findElement(forgotPasswordLinkLocator).click();

@@ -14,7 +14,7 @@ public class ForgotPasswordPage {
         this.driver = driver;
     }
 
-    @Step
+    @Step("Поиск и нажатие на кнопку 'Войти' на страницы восстановления пароля")
     public void clickForgotPasswordEnterButtonLocator() {
 
         driver.findElement(forgotPasswordEnterButtonLocator).click();

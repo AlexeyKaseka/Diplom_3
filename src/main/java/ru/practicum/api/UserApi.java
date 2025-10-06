@@ -17,7 +17,7 @@ public class UserApi {
 
     private User user;
 
-    @Step
+    @Step("Создание пользователя")
     public ValidatableResponse createUser(User user) {
         return given()
                 .contentType(ContentType.JSON)
@@ -29,7 +29,7 @@ public class UserApi {
 
     }
 
-    @Step
+    @Step("Авторизация пользователя")
     public ValidatableResponse loginUser(User user) {
         return given()
                 .contentType(ContentType.JSON)
@@ -39,14 +39,14 @@ public class UserApi {
                 .then();
     }
 
-    @Step
+    @Step("Получения токена")
     public String getAccessToken(User user) {
         return loginUser(user)
                 .extract()
                 .path("accessToken");
     }
 
-    @Step
+    @Step("Удаление пользователя")
     public ValidatableResponse deleteUser(String accessToken) {
         return given()
                 .contentType(ContentType.JSON)
@@ -57,7 +57,7 @@ public class UserApi {
     }
 
 
-    @Step
+    @Step("Проверка авторизации пользователя")
     public void loginUserAndCheckStatus(User user) {
         loginUser(user)
                 .statusCode(SC_OK)

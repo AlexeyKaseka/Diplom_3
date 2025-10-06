@@ -26,49 +26,50 @@ public class RegistrationPage {
         this.driver = driver;
     }
 
-    @Step
+    @Step("Поиск полей ввода")
     public List<WebElement> getInputFields() {
         return driver.findElements(fieldsEmailAndPasswordLocator);
     }
 
+    @Step("Заполнение поля 'Имя'")
     public void enterName(String name) {
         List<WebElement> fields = getInputFields();
         fields.get(0).clear();
         fields.get(0).sendKeys(name);
     }
 
-    @Step
+    @Step("Заполнение поля 'Email'")
     public void enterEmail(String email) {
         List<WebElement> fields = getInputFields();
         fields.get(1).clear();
         fields.get(1).sendKeys(email);
     }
 
-    @Step
+    @Step("Заполнение поля 'Password'")
     public void enterPassword(String password) {
         driver.findElement(passwordFieldLocator).clear();
         driver.findElement(passwordFieldLocator).sendKeys(password);
     }
 
-    @Step
+    @Step("Поиск и нажатие на кнопку 'Зарегестрироваться'")
     public void clickRegistrationButton() {
 
         driver.findElement(registrationButtonLocator).click();
     }
 
-    @Step
+    @Step("Ожидание сообщения об ошибке")
     public void waitForErrorMessage() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessageLocator));
     }
 
-    @Step
+    @Step("Проверка текста сообщения об ошибке")
     public void checkErrorMessageDisplayed() {
         WebElement errorMessage = driver.findElement(errorMessageLocator);
         assertTrue("Должно отображаться сообщение об ошибке", errorMessage.isDisplayed());
     }
 
-    @Step
+    @Step("Поиск и нажатие на кнопку 'Войти' на странице регистрации")
     public void clickRegistrationEnterButton() {
 
         driver.findElement(registrationEnterButton).click();
