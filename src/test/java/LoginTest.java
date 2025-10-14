@@ -1,0 +1,142 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import ru.practicum.api.User;
+import ru.practicum.api.UserApi;
+import ru.practicum.pages.ForgotPasswordPage;
+import ru.practicum.pages.LoginPage;
+import ru.practicum.pages.MainPage;
+import ru.practicum.pages.RegistrationPage;
+
+
+
+public class LoginTest extends BaseTest {
+
+    private MainPage mainPage;
+    private LoginPage loginPage;
+    private RegistrationPage registrationPage;
+    private ForgotPasswordPage forgotPasswordPage;
+    private User user;
+    private UserApi userApi;
+    private String accessToken;
+
+    @Before
+    public void setUp() {
+
+        mainPage = new MainPage(driver);
+        loginPage = new LoginPage(driver);
+        registrationPage = new RegistrationPage(driver);
+        forgotPasswordPage = new ForgotPasswordPage(driver);
+        user = new User();
+        userApi = new UserApi();
+        user.withName(RandomStringUtils.randomAlphabetic(8))
+                .withEmail(RandomStringUtils.randomAlphabetic(8) + "@test.ru")
+                .withPassword(RandomStringUtils.randomAlphabetic(8));
+        userApi.createUser(user);
+        accessToken = userApi.getAccessToken(user);
+    }
+
+    @Test
+    @DisplayName("Авторизация пользователя")
+    @Description("Позитивный тест: проверка успешной авторизации пользователя через кнопку войти на главной")
+    public void loginFromMainPageEnterButtonTest() {
+
+
+        mainPage.openMainPage();
+        mainPage.mainPageEnterButton();
+        loginPage.enterEmail(user.getEmail());
+        loginPage.enterPassword(user.getPassword());
+        loginPage.clickEnterButton();
+        mainPage.waitForMainPage();
+        mainPage.verifyMainPageUrl();
+
+
+        userApi.loginUserAndCheckStatus(user);
+
+
+    }
+
+    @Test
+    @DisplayName("Авторизация пользователя")
+    @Description("Позитивный тест: проверка успешной авторизации пользователя через кнопку личный кабинет")
+    public void loginFromPersonalAccountButtonTest() {
+
+
+        mainPage.openMainPage();
+        mainPage.сlickPersonalAccountButton();
+        loginPage.enterEmail(user.getEmail());
+        loginPage.enterPassword(user.getPassword());
+        loginPage.clickEnterButton();
+        mainPage.waitForMainPage();
+        mainPage.verifyMainPageUrl();
+
+
+        userApi.loginUserAndCheckStatus(user);
+
+
+    }
+
+
+    @Test
+    @DisplayName("Авторизация пользователя")
+    @Description("Позитивный тест: проверка успешной авторизации пользователя через кнопку войти на страницы регистрации")
+    public void loginFromRegistrationEnterButtonTest() {
+
+
+        mainPage.openMainPage();
+        mainPage.сlickPersonalAccountButton();
+        loginPage.clickRegistrationLinkButton();
+        registrationPage.clickRegistrationEnterButton();
+        loginPage.enterEmail(user.getEmail());
+        loginPage.enterPassword(user.getPassword());
+        loginPage.clickEnterButton();
+        mainPage.waitForMainPage();
+        mainPage.verifyMainPageUrl();
+
+
+        userApi.loginUserAndCheckStatus(user);
+
+
+    }
+
+    @Test
+    @DisplayName("Авторизация пользователя")
+    @Description("Позитивный тест: проверка успешной авторизации пользователя через кнопку войти на странице востановления пароля")
+    public void loginFromForgotPasswordEnterButtonTest() {
+
+
+        mainPage.openMainPage();
+        mainPage.сlickPersonalAccountButton();
+        loginPage.clickForgotPasswordLinkLocator();
+        forgotPasswordPage.clickForgotPasswordEnterButtonLocator();
+        loginPage.enterEmail(user.getEmail());
+        loginPage.enterPassword(user.getPassword());
+        loginPage.clickEnterButton();
+        mainPage.waitForMainPage();
+        mainPage.verifyMainPageUrl();
+
+
+        userApi.loginUserAndCheckStatus(user);
+
+
+    }
+
+
+    @After
+    public void tearDown() {
+        driver.quit();
+
+        if (accessToken != null) {
+            userApi.deleteUser(accessToken);
+
+        }
+
+
+    }
+
+
+}
